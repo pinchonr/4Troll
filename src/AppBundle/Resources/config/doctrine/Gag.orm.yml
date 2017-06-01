@@ -1,0 +1,25 @@
+AppBundle\Entity\Gag:
+    type: entity
+    table: Gag
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        title: 
+            type: string
+            length: 100
+            nullable: false
+        filename:
+            type : string
+            length: 100
+        lastModifiedDate:
+            type: datetime
+            nullable: false
+    oneToOne:
+        user:
+            targetEntity: User
+            joinColumn:
+                name: idUser
+                referencedColumnName: id
+                onDelete: CASCADE
