@@ -2,26 +2,141 @@
 
 namespace AppBundle\Entity;
 
+/**
+ * Comment
+ */
 class Comment
 {
-	private message;
-	private date;
-	private Gag;
-    private User;
+    /**
+     * @var int
+     */
+    private $id;
 
-	public function getMessage(){
-		return $this->message;
+    /**
+     * @var string
+     */
+    private $message;
+
+    /**
+     * @var \DateTime
+     */
+    private $date;
+
+    /**
+     * @var \stdClass
+     */
+    private $gag;
+
+    /**
+     * @var \stdClass
+     */
+    private $user;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
-    public function getUser(){
-    	return $this->user;
+    /**
+     * Set message
+     *
+     * @param string $message
+     *
+     * @return Comment
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
     }
 
-    public function getLastModifiedDate(){
+    /**
+     * Get message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Comment
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
         return $this->date;
     }
-    	
 
+    /**
+     * Set gag
+     *
+     * @param \stdClass $gag
+     *
+     * @return Comment
+     */
+    public function setGag($gag)
+    {
+        $this->gag = $gag;
+
+        return $this;
+    }
+
+    /**
+     * Get gag
+     *
+     * @return \stdClass
+     */
+    public function getGag()
+    {
+        return $this->gag;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \stdClass $user
+     *
+     * @return Comment
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \stdClass
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
 
-?>

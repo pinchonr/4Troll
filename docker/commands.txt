@@ -1,0 +1,29 @@
+docker run --detach --name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql
+
+docker inspect mysql
+
+find the element named "IPAddress" (example: "IPAddress": "172.17.0.2"). This IP is to change in the project configurations:
+
+/4Troll/app/config/parameters.yml
+
+You can now access the databases with this ip address by running the following command
+
+mysql -u root -p root -h YOUR_IP_ADDRESS -P 3306
+
+run 
+
+create database Symfony;
+
+create all tables with command:
+
+php bin/console doctrine:schema:update --force
+
+
+
+
+Autres commandes:
+
+php bin/console doctrine:schema:update 
+php bin/console doctrine:schema:update  --dump-sql
+
+

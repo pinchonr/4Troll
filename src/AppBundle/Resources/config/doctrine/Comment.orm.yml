@@ -1,7 +1,7 @@
-AppBundle\Entity\Gag:
+AppBundle\Entity\Comment:
     type: entity
-    table: Gag
-    repositoryClass: AppBundle\Repository\GagRepository
+    table: Comment
+    repositoryClass: AppBundle\Repository\CommentRepository
     id:
         id:
             type: integer
@@ -9,11 +9,18 @@ AppBundle\Entity\Gag:
             generator:
                 strategy: AUTO
     fields:
-        title:
-            type: string
-            length: 255
-        lastModified:
+        message:
+            type: text
+        date:
             type: datetime
+    manyToOne: 
+        gag:
+            targetEntity: Gag
+            joinColumn:
+                name: gag_id
+                referencedColumnName: id
+                nullable: false
+                onDelete: CASCADE
     manyToOne:
         user:
             targetEntity: User

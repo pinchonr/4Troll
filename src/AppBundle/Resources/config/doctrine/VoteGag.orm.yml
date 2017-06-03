@@ -1,0 +1,27 @@
+AppBundle\Entity\VoteGag:
+    type: entity
+    table: VoteGag
+    repositoryClass: AppBundle\Repository\VoteGagRepository
+    id:
+        gag:
+            associationKey: true
+        user:
+            associationKey: true
+    fields:
+        updown:
+            type: boolean
+    manyToOne: 
+        gag:
+            targetEntity: Gag
+            joinColumn:
+                name: gag_id
+                referencedColumnName: id
+                onDelete: CASCADE
+    oneToOne:
+        user:
+            targetEntity: User
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+                onDelete: CASCADE
+    lifecycleCallbacks: {  }

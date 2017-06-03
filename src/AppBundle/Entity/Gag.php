@@ -2,29 +2,112 @@
 
 namespace AppBundle\Entity;
 
+/**
+ * Gag
+ */
 class Gag
 {
-	private title;
-    private filename;
-    private lastModifiedDate;
-    private user;
+    /**
+     * @var int
+     */
+    private $id;
 
-    public function getTitle(){
+    /**
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var \DateTime
+     */
+    private $lastModified;
+
+    /**
+     * @var \stdClass
+     */
+    private $user;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Gag
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function getFilename(){
-        return $this->filename;
+    /**
+     * Set lastModified
+     *
+     * @param \DateTime $lastModified
+     *
+     * @return Gag
+     */
+    public function setLastModified($lastModified)
+    {
+        $this->lastModified = $lastModified;
+
+        return $this;
     }
 
-    public function getLastModifiedDate(){
-        return $this->lastModifiedDate;
+    /**
+     * Get lastModified
+     *
+     * @return \DateTime
+     */
+    public function getLastModified()
+    {
+        return $this->lastModified;
     }
 
-    public function getUser() {
+    /**
+     * Set user
+     *
+     * @param \stdClass $user
+     *
+     * @return Gag
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \stdClass
+     */
+    public function getUser()
+    {
         return $this->user;
     }
-
 }
 
-?>
