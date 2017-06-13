@@ -3,16 +3,20 @@
 {% block title %}4Troll - Register{% endblock %}
 
 {% block body %}
-    <h1>Register:</h1>
+    <h1 class="text-center">Register:</h1>
+
+    <div class="col-md-8 col-md-offset-2">
 
     {{ form_start(form) }}
     {{ form_row(form.surname) }}
     {{ form_row(form.name) }}
-    {{ form_row(form.pseudo) }}
+    {{ form_row(form.username) }}
     {{ form_row(form.password)}}
     {{ form_row(form.email) }}
-    <button type="submit">Register!</button>
+    <button  class="btn btn-success col-md-12" type="submit">Register!</button>
 	{{ form_end(form) }}
+
+    </div>
 
 	
 

@@ -17,7 +17,7 @@ AppBundle\Entity\User:
         name:
             type: string
             length: 255
-        pseudo:
+        username:
             type: string
             length: 255
             unique: true

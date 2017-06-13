@@ -2,10 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * User
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -30,7 +32,7 @@ class User
     /**
      * @var string
      */
-    private $pseudo;
+    private $username;
 
     /**
      * @var string
@@ -41,6 +43,11 @@ class User
      * @var string
      */
     private $email;
+
+    /**
+     * @var string
+     */
+    private $salt;
 
 
     /**
@@ -132,9 +139,9 @@ class User
      *
      * @return User
      */
-    public function setPseudo($pseudo)
+    public function setUsername($username)
     {
-        $this->pseudo = $pseudo;
+        $this->username = $username;
 
         return $this;
     }
@@ -144,9 +151,9 @@ class User
      *
      * @return string
      */
-    public function getPseudo()
+    public function getUsername()
     {
-        return $this->pseudo;
+    	return $this->username;
     }
 
     /**
@@ -195,6 +202,39 @@ class User
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     *
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+	/**
+	 * 
+	 * {@inheritDoc}
+	 * @see \Symfony\Component\Security\Core\User\UserInterface::eraseCredentials()
+	 */
+    public function eraseCredentials()
+    {
+
     }
 }
 
