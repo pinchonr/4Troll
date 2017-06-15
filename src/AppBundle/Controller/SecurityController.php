@@ -5,15 +5,21 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\UserType;
+use AppBundle\Form\GagType;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Gag;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 class SecurityController extends Controller 
 {
 		public function indexAction(Request $request)
     {
+        $em= $this->getDoctrine()->getManager();
+        $gags= $em->getRepository('AppBundle:Gag')->findAll();
         return $this->render('home/home.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            'gags' => $gags
         ]);
     }
 
@@ -61,11 +67,40 @@ class SecurityController extends Controller
 	}
 
 	public function editProfileAction(Request $request){
-		//TODO display form with user values and maque an update in DB on submit
+		//TODO display form with user values and make an update in DB on submit
 	}
 
 	public function newGagAction(Request $request){
-		//TODO put code to load a nex gag
+		//TODO put code to load a new gag
+        $em= $this->getDoctrine()->getManager();
+        $gag = new Gag();
+        
+        $form = $this->createForm(GagType::class, $gag);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $gag->setUser($this->getUser());
+            //we get the file (field is not explicit but only the FileName will be stored in DB)
+            $file=$gag->getFileName();
+            //creating unique file name
+            $filename=md5(uniqid()).'.'.$file->guessExtension();
+            //we change the file name
+            $gag->setFileName($filename);
+            //we move the file in the upload dir
+            $file->move($gag->getAbsolutePath());
+            
+            $gag->setLastModified();
+
+            $em->persist($gag);
+            $em->flush();
+
+            return $this->redirectToRoute('app');
+        }
+
+        return $this->render(
+            'upload/uploadGag.html.twig',
+            array('form' => $form->createView())
+        );
 	}
 }
 ?>

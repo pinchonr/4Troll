@@ -16,6 +16,15 @@
         	</div>
             {% endif%}
 
+            <div class="col-md-8 col-md-offset-2">
+                {% for gag in gags %}
+                <div>
+                    <img src="{{ asset('uploads/gags/'~'gag.filename)}}')}}" alt="Gag" />
+                </div>
+            {% endfor %}
+        </div>
+</ul>
+
         </div>
     </div>
 {% endblock %}

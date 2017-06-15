@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}4Troll - Upload a new Gag{% endblock %}
+
+
+{% block body %}
+
+<h1 class="text-center">Upload a new Gag</h1>
+
+<div class="col-md-8 col-md-offset-2">
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.fileName) }}
+    <button  class="btn btn-success col-md-12" type="submit">Post!</button>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}

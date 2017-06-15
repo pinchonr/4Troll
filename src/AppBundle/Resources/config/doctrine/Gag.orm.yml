@@ -14,6 +14,9 @@ AppBundle\Entity\Gag:
             length: 255
         lastModified:
             type: datetime
+        fileName:
+            type: string
+            length: 255
     manyToOne:
         user:
             targetEntity: User

@@ -27,6 +27,11 @@ class Gag
      */
     private $user;
 
+    /**
+     * @var string
+     */
+    private $fileName;
+
 
     /**
      * Get id
@@ -69,9 +74,9 @@ class Gag
      *
      * @return Gag
      */
-    public function setLastModified($lastModified)
+    public function setLastModified()
     {
-        $this->lastModified = $lastModified;
+        $this->lastModified = new \DateTime('now');
 
         return $this;
     }
@@ -109,5 +114,71 @@ class Gag
     {
         return $this->user;
     }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->fileName
+            ? null
+            : $this->getUploadRootDir().'/'.$this->fileName;
+    }
+
+
+
+    /**
+     * Get the web path of the file
+     *
+     * @return string
+     */
+    public function getWebPath()
+    {
+        return null === $this->fileName
+            ? null
+            : $this->getUploadDir().'/'.$this->fileName;
+    }
+
+    /**
+     * Get the upload root directory of the file
+     *
+     * @return string
+     */
+    protected function getUploadRootDir()
+    {
+        return __DIR__.'/../../../web/'.$this->getUploadDir();
+    }
+
+    /**
+     * Get the upload directory of the file
+     *
+     * @return string
+     */
+    protected function getUploadDir()
+    {
+        return 'uploads/gags';
+    }
+
+    /**
+     * Get file name
+     *
+     * @return fileName
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * Set file name
+     *
+     * @param name
+     *
+     * @return Gag
+     */
+    public function setFileName($name)
+    {
+        $this->fileName = $name;
+
+        return $this;
+    }
+
 }
 

@@ -9,27 +9,27 @@
             href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse" style="border-radius:0px;">
             <div class="container-fluid">
             <div class="navbar-header">
-            <a class="navbar-brand" href="{{path("app")}}">4Troll</a>
+            <a class="navbar-brand" href="{{path("app")}}" style="color:#5cb85c">4Troll</a>
              </div>
                 <ul class="nav navbar-nav navbar-right">
 
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li>
                         <a href="{{path("login")}}">
-                            <span class="glyphicon glyphicon-log-in"></span>
+                            <span class="glyphicon glyphicon-log-in" style="margin-right:2px; margin-left:2px;"></span>
                         Login</a>
                     </li>
                     {% endif %}
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li>
-                        <a href="{{path("editProfile")}}">{{ app.user.username }}</a>
+                        <a href="{{path("editProfile")}}"><span class="glyphicon glyphicon-user" style="margin-right:2px; margin-left:2px;"></span>{{ app.user.username }}</a>
                     </li>
                     <li>
-                        <a href="{{path("logout")}}">Logout</a>
+                        <a href="{{path("logout")}}"><span class="glyphicon glyphicon-off" style="margin-right:2px; margin-left:2px;"></span>Logout</a>
                     </li>
                     {% endif %}
                 </ul>
