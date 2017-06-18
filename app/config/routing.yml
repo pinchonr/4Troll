@@ -1,6 +1,6 @@
 app:
     path: /
-    defaults: { _controller: AppBundle:Security:index }
+    defaults: { _controller: AppBundle:Clown:index }
 
 login:
     path: /login
@@ -19,4 +19,8 @@ logout:
 
 newGag:
     path: /newGag
-    defaults: { _controller: AppBundle:Security:newGag }
+    defaults: { _controller: AppBundle:Clown:newGag }
+
+gagDetail:
+    path: /Gag/{id}
+    defaults: { _controller: AppBundle:Clown:gagDetail}

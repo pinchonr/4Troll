@@ -21,7 +21,6 @@ AppBundle\Entity\Comment:
                 referencedColumnName: id
                 nullable: false
                 onDelete: CASCADE
-    manyToOne:
         user:
             targetEntity: User
             joinColumn:
@@ -29,4 +28,5 @@ AppBundle\Entity\Comment:
                 referencedColumnName: id
                 nullable: false
                 onDelete: CASCADE
+
     lifecycleCallbacks: {  }

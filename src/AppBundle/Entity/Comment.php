@@ -74,9 +74,9 @@ class Comment
      *
      * @return Comment
      */
-    public function setDate($date)
+    public function setDate()
     {
-        $this->date = $date;
+        $this->date = new \DateTime('now');
 
         return $this;
     }

@@ -4,16 +4,13 @@
 
 
 {% block body %}
-
-
-
-<h1 class="text-center">Login</h1>
+<h1 class="text-center hardGrey">Login</h1>
 
 <div class="col-md-8 col-md-offset-2">
 
     
 
-    <form action="{{ path('login') }}" method="post">
+    <form action="{{ path('login') }}" method="post" class="hardGrey">
 
     {% if error %}
         <div class="text-center text-danger bg-danger">
@@ -31,7 +28,7 @@
             <input class="form-control" type="password" id="password" name="_password" />
         </div>
 
-        <button class="col-md-12 btn btn-success btn-block" style="margin-top: 10px;margin-bottom: 10px;"type="submit" >login</button>
+        <button class="col-md-12 btn btn-success btn-block text-white" style="margin-top: 10px;margin-bottom: 10px;"type="submit" >login</button>
     
     </form>
 
@@ -41,7 +38,7 @@
 
 <div class="col-md-8 col-md-offset-2 text-center" >
 <p> New to this website? Please 
-<a class="text-center" href="{{path('register')}}" >Register</a>
+<a class="text-center secondaryColor" href="{{path('register')}}" >Register</a>
 </p>
 </div>
 {% endblock %}

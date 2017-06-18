@@ -1,0 +1,35 @@
+.secondaryColor{
+	color:#5cb85c;
+}
+
+.sweetGrey{
+	color:#eee;
+}
+
+.primaryColor{
+	color:#404347;
+}
+
+.no-margin-and-padding{
+	margin:0px;
+	padding:0px;
+}
+
+.bg-white{
+	background-color: white;
+}
+h2{
+	font-size: 16pt;
+}
+
+a{
+	color:#404347;
+}
+
+a:hover{
+	color:#5cb85c;
+}
+
+.text-white{
+	color:white;
+}

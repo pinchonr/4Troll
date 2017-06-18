@@ -45,12 +45,6 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @var string
-     */
-    private $salt;
-
-
-    /**
      * Get id
      *
      * @return int
@@ -211,22 +205,9 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        return $this->salt;
+        return null;
     }
 
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     *
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
 	/**
 	 * 
 	 * {@inheritDoc}

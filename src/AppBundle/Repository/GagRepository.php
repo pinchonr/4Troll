@@ -10,13 +10,19 @@ namespace AppBundle\Repository;
  */
 class GagRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function findAll()
+	public function findAllOrderByDate()
 	{
 		return $this->getEntityManager()
-            		->createQuery(
-                'SELECT g FROM AppBundle:Gag g ORDER BY g.lastModified ASC'
-            )
-            ->getResult();
+            		->createQuery('SELECT g FROM AppBundle:Gag g ORDER BY g.lastModified ASC')
+            		->getResult();
 
+	}
+
+	public function findOneById(int $id)
+	{ 
+		return $this->getEntityManager()
+					->createQuery('SELECT g FROM AppBundle:Gag g WHERE g.id=:id')
+            		->setParameter('id', $id)
+					->getOneOrNullResult();
 	}
 }

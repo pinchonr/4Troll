@@ -2,3 +2,4 @@ AppBundle\Entity\Gag:
     properties:
         fileName:
             - NotBlank: ~
+        

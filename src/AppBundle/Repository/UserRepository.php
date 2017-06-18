@@ -10,7 +10,7 @@ namespace AppBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function findOneByUsername(){
+	public function findOneBy(array $array){
 
 	}
 }

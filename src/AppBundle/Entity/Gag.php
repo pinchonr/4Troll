@@ -141,7 +141,7 @@ class Gag
      *
      * @return string
      */
-    protected function getUploadRootDir()
+    public function getUploadRootDir()
     {
         return __DIR__.'/../../../web/'.$this->getUploadDir();
     }
