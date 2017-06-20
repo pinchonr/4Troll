@@ -19,7 +19,7 @@
                 <!-- Gag informations display-->
                     <footer class="col-md-12 text-left" style="margin:0px; padding:0px;"  >
 
-                            <span class="col-md-4 text-center" style="height:44px;line-height:44px" >Posté le {{gag.lastModified|date('d/m/y')}} par {{gag.user.username}}
+                            <span class="col-md-4 text-center" style="height:44px;line-height:44px" >Posté le {{gag.lastModified|date('d/m/y')}} par {{gag.author.username}}
                             </span>
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <span class="col-md-4 col-md-offset-4 text-right">
@@ -33,22 +33,31 @@
                                 </a>
                             </span>
                             {% endif %}
-
                     </footer>
                 </div>
+            </div>
+
+            <div class="col-md-8 col-md-offset-2">
                 <!-- Comment form display -->
-                <div class="col-md-12 hardGrey text-left" style="margin-top:10px; padding:0px;">
+                <div class="col-md-12 hardGrey text-left" style="margin-top:10px;padding:0px;">
                     {{ form_start(form) }}
                     {{ form_row(form.message) }}
                     <button  class="btn btn-success col-md-12" type="submit">Comment</button>
                     {{ form_end(form) }}
 
-                </div>
+                </div >
                 <!-- Comments display -->
-                <div>
-                    {% for comment in comments %}
-                    <header>Posté le {{comment.date|date('d/m/y')}} par {{comment.user.username}}</header>
-                    <p>{{comment.message}}</p>
+                <div class="col-md-12 hardGrey text-left" style="margin-top:20px;padding:0px;">
+                    {% for comment in gag.comments %}
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Posté le {{comment.publishedAt|date('d/m/y')}} par {{comment.author.username}}
+                        </div>
+                        <div class="panel-body">
+                            {{comment.message}}
+                        </div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>

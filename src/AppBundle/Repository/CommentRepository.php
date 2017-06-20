@@ -10,12 +10,11 @@ namespace AppBundle\Repository;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
-
-	public function findAllCommentsForGivenGagOrderByDate(int $id){
-
-		return $this->getEntityManager()
-            		->createQuery('SELECT comment FROM AppBundle:Comment comment WHERE comment.gag =:id ORDER BY comment.date ASC')
-            		->setParameter('id',$id)
-            		->getResult();
-	}
+    public function findAllCommentsForGivenGagOrderByDate(int $id)
+    {
+        return $this->getEntityManager()
+                    ->createQuery('SELECT comment FROM AppBundle:Comment comment WHERE comment.gag =:id ORDER BY comment.publishedAt ASC')
+                    ->setParameter('id', $id)
+                    ->getResult();
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Gag
  */
@@ -18,19 +20,37 @@ class Gag
     private $title;
 
     /**
+     * @var string
+     */
+    private $fileName;
+
+    /**
      * @var \DateTime
      */
     private $lastModified;
 
     /**
-     * @var \stdClass
+     * @var User
      */
-    private $user;
+    private $author;
 
     /**
-     * @var string
+     * @var ArrayCollection
      */
-    private $fileName;
+    private $comments;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $votes;
+    
+
+    public function __construct()
+    {
+        $this->lastModified = new \DateTime();
+        $this->comments = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+    }
 
 
     /**
@@ -44,20 +64,6 @@ class Gag
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Gag
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
      * Get title
      *
      * @return string
@@ -68,17 +74,34 @@ class Gag
     }
 
     /**
-     * Set lastModified
+     * Set title
      *
-     * @param \DateTime $lastModified
-     *
-     * @return Gag
+     * @param string $title
      */
-    public function setLastModified()
+    public function setTitle($title)
     {
-        $this->lastModified = new \DateTime('now');
+        $this->title = $title;
+    }
 
-        return $this;
+
+    /**
+     * Get file name
+     *
+     * @return string
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * Set file name
+     *
+     * @param string
+     */
+    public function setFileName($name)
+    {
+        $this->fileName = $name;
     }
 
     /**
@@ -92,37 +115,101 @@ class Gag
     }
 
     /**
-     * Set user
+     * Set lastModified
      *
-     * @param \stdClass $user
-     *
-     * @return Gag
+     * @param \DateTime $lastModified
      */
-    public function setUser($user)
+    public function setLastModified(\DateTime $lastModified)
     {
-        $this->user = $user;
-
-        return $this;
+        $this->lastModified = $lastModified;
     }
 
     /**
-     * Get user
+     * Get the author
      *
-     * @return \stdClass
+     * @return User
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 
+    /**
+     * Set author
+     *
+     * @param User $author
+     */
+    public function setAuthor(User $author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+    * Get all comments
+    */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+    * Add a new Comment
+    */
+    public function addComment(Comment $comment)
+    {
+        $comment->setGag($this);
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+        }
+    }
+    /**
+    * Remove a comment
+    */
+    public function removeComment(Comment $comment)
+    {
+        $comment->setGag(null);
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+    * Get all votes
+    */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+    * Add a new Comment
+    */
+    public function addVote(Vote $vote)
+    {
+        $vote->setGag($this);
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
+        }
+    }
+
+    /**
+    * Remove a comment
+    */
+    public function removeVote(Vote $vote)
+    {
+        $vote->setGag(null);
+        $this->votes->removeElement($vote);
+    }
+
+    /**
+    *Get the absolute path of the file
+    *
+    *@return string
+    */
     public function getAbsolutePath()
     {
         return null === $this->fileName
             ? null
             : $this->getUploadRootDir().'/'.$this->fileName;
     }
-
-
 
     /**
      * Get the web path of the file
@@ -155,30 +242,4 @@ class Gag
     {
         return 'uploads/gags';
     }
-
-    /**
-     * Get file name
-     *
-     * @return fileName
-     */
-    public function getFileName()
-    {
-        return $this->fileName;
-    }
-
-    /**
-     * Set file name
-     *
-     * @param name
-     *
-     * @return Gag
-     */
-    public function setFileName($name)
-    {
-        $this->fileName = $name;
-
-        return $this;
-    }
-
 }
-

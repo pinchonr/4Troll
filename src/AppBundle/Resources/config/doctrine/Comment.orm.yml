@@ -11,17 +11,13 @@ AppBundle\Entity\Comment:
     fields:
         message:
             type: text
-        date:
+        publishedAt:
             type: datetime
     manyToOne: 
         gag:
             targetEntity: Gag
-            joinColumn:
-                name: gag_id
-                referencedColumnName: id
-                nullable: false
-                onDelete: CASCADE
-        user:
+            inversedBy: comments
+        author:
             targetEntity: User
             joinColumn:
                 name: user_id

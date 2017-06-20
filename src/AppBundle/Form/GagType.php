@@ -9,9 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-
-
-
 class GagType extends AbstractType
 {
     /**
@@ -19,7 +16,7 @@ class GagType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title',TextType::class)
+        $builder->add('title', TextType::class)
                 ->add('fileName', FileType::class, array('label' => 'Upload a new file (jpg,ico,png,pdf)'));
     }
     
@@ -40,6 +37,4 @@ class GagType extends AbstractType
     {
         return 'appbundle_gag';
     }
-
-
 }

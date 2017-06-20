@@ -31,7 +31,7 @@
                 <!-- Gag informations display-->
                     <footer class="col-md-12 text-left" style="margin:0px; padding:0px; background-color:white; color:#404347;"  >
 
-                            <span class="col-md-4 text-center" style="height:44px;line-height:44px" >Posté le {{gag.lastModified|date('d/m/y')}} par {{gag.user.username}}
+                            <span class="col-md-4 text-center" style="height:44px;line-height:44px" >Posté le {{gag.lastModified|date('d/m/y')}} par {{gag.author.username}}
                             </span>
                             <span class="col-md-4 text-center" style="height:44px;line-height:44px">
                                 <a href="{{path("gagDetail",{ 'id': gag.id })}}">Voir les commentaires</a>

@@ -20,18 +20,22 @@ class Comment
     /**
      * @var \DateTime
      */
-    private $date;
+    private $publishedAt;
 
     /**
-     * @var \stdClass
+     * @var Gag
      */
     private $gag;
 
     /**
-     * @var \stdClass
+     * @var author
      */
-    private $user;
+    private $author;
 
+    public function __construct()
+    {
+        $this->publishedAt = new \DateTime();
+    }
 
     /**
      * Get id
@@ -53,8 +57,6 @@ class Comment
     public function setMessage($message)
     {
         $this->message = $message;
-
-        return $this;
     }
 
     /**
@@ -74,11 +76,9 @@ class Comment
      *
      * @return Comment
      */
-    public function setDate()
+    public function setPublishedAt(DateTime $publishedAt)
     {
-        $this->date = new \DateTime('now');
-
-        return $this;
+        $this->publishedAt = $publishedAt;
     }
 
     /**
@@ -86,29 +86,25 @@ class Comment
      *
      * @return \DateTime
      */
-    public function getDate()
+    public function getPublishedAt()
     {
-        return $this->date;
+        return $this->publishedAt;
     }
 
     /**
      * Set gag
      *
-     * @param \stdClass $gag
-     *
-     * @return Comment
+     * @param Gag $gag
      */
-    public function setGag($gag)
+    public function setGag(Gag $gag)
     {
         $this->gag = $gag;
-
-        return $this;
     }
 
     /**
      * Get gag
      *
-     * @return \stdClass
+     * @return Gag
      */
     public function getGag()
     {
@@ -116,27 +112,24 @@ class Comment
     }
 
     /**
-     * Set user
+     * Set author
      *
-     * @param \stdClass $user
-     *
-     * @return Comment
+     * @param User $author
      */
-    public function setUser($user)
+    public function setAuthor(User $author)
     {
-        $this->user = $user;
+        $this->author = $author;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get author
      *
-     * @return \stdClass
+     * @return User
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 }
-

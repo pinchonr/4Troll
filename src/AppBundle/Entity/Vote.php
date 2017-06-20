@@ -3,9 +3,9 @@
 namespace AppBundle\Entity;
 
 /**
- * VoteGag
+ * Vote
  */
-class VoteGag
+class Vote
 {
     /**
      * @var int
@@ -13,19 +13,24 @@ class VoteGag
     private $id;
 
     /**
-     * @var \stdClass
+     * @var Gag
      */
     private $gag;
 
     /**
-     * @var \stdClass
+     * @var User
      */
     private $user;
 
     /**
      * @var bool
      */
-    private $updown;
+    private $upVote= false;
+
+    /**
+     * @var bool
+     */
+    private $downVote= false;
 
 
     /**
@@ -41,21 +46,19 @@ class VoteGag
     /**
      * Set gag
      *
-     * @param \stdClass $gag
+     * @param Gag $gag
      *
      * @return VoteGag
      */
-    public function setGag($gag)
+    public function setGag(Gag $gag)
     {
         $this->gag = $gag;
-
-        return $this;
     }
 
     /**
      * Get gag
      *
-     * @return \stdClass
+     * @return Gag
      */
     public function getGag()
     {
@@ -65,21 +68,19 @@ class VoteGag
     /**
      * Set user
      *
-     * @param \stdClass $user
+     * @param User $user
      *
-     * @return VoteGag
+     * @return Vote
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
-
-        return $this;
     }
 
     /**
      * Get user
      *
-     * @return \stdClass
+     * @return User
      */
     public function getUser()
     {
@@ -87,17 +88,25 @@ class VoteGag
     }
 
     /**
-     * Set updown
+     * Get updown
+     *
+     * @return bool
+     */
+    public function getUpVote()
+    {
+        return $this->upVote;
+    }
+
+    /**
+     * Set upVotes
      *
      * @param boolean $updown
      *
-     * @return VoteGag
+     * @return Vote
      */
-    public function setUpdown($updown)
+    public function setUpVote()
     {
-        $this->updown = $updown;
-
-        return $this;
+        $this->upVote = true;
     }
 
     /**
@@ -105,9 +114,20 @@ class VoteGag
      *
      * @return bool
      */
-    public function getUpdown()
+    public function getDownVote()
     {
-        return $this->updown;
+        return $this->downVote;
+    }
+
+    /**
+     * Set upVotes
+     *
+     * @param boolean $updown
+     *
+     * @return Vote
+     */
+    public function setDownVote()
+    {
+        $this->downVote = true;
     }
 }
-

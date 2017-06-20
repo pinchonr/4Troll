@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-
 class CommentType extends AbstractType
 {
     /**
@@ -36,6 +35,4 @@ class CommentType extends AbstractType
     {
         return 'appbundle_comment';
     }
-
-
 }

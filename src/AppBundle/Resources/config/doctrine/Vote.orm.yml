@@ -1,4 +1,4 @@
-AppBundle\Entity\VoteGag:
+AppBundle\Entity\Vote:
     type: entity
     table: VoteGag
     repositoryClass: AppBundle\Repository\VoteGagRepository
@@ -8,15 +8,14 @@ AppBundle\Entity\VoteGag:
         user:
             associationKey: true
     fields:
-        updown:
+        upVote:
+            type: boolean
+        downVote:
             type: boolean
     manyToOne: 
         gag:
             targetEntity: Gag
-            joinColumn:
-                name: gag_id
-                referencedColumnName: id
-                onDelete: CASCADE
+            inversedBy: votes
     oneToOne:
         user:
             targetEntity: User
@@ -24,4 +23,5 @@ AppBundle\Entity\VoteGag:
                 name: user_id
                 referencedColumnName: id
                 onDelete: CASCADE
+
     lifecycleCallbacks: {  }

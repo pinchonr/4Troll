@@ -17,7 +17,7 @@ class User implements UserInterface
     /**
      * @var array
      */
-    private $roles;
+    private $roles=[];
 
     /**
      * @var string
@@ -58,24 +58,24 @@ class User implements UserInterface
      * Set roles
      *
      * @param array $roles
-     *
-     * @return User
-     */
-    public function setRoles($roles)
+     **/
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
-
-        return $this;
     }
 
     /**
-     * Get roles
-     *
-     * @return array
+     * Returns the roles of the user
      */
     public function getRoles()
     {
-        return $this->roles;
+        $roles = $this->roles;
+
+        // guarantees that a user always has at least one role for security
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+        return array_unique($roles);
     }
 
     /**
@@ -129,7 +129,7 @@ class User implements UserInterface
     /**
      * Set pseudo
      *
-     * @param string $pseudo
+     * @param string $username
      *
      * @return User
      */
@@ -147,7 +147,7 @@ class User implements UserInterface
      */
     public function getUsername()
     {
-    	return $this->username;
+        return $this->username;
     }
 
     /**
@@ -205,17 +205,14 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        return null;
     }
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * @see \Symfony\Component\Security\Core\User\UserInterface::eraseCredentials()
-	 */
+    /**
+     *
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\UserInterface::eraseCredentials()
+     */
     public function eraseCredentials()
     {
-
     }
 }
-

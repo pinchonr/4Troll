@@ -18,11 +18,19 @@ AppBundle\Entity\Gag:
             type: string
             length: 255
     manyToOne:
-        user:
+        author:
             targetEntity: User
             joinColumn:
                 name: user_id
                 referencedColumnName: id
                 nullable: false
                 onDelete: CASCADE
+    oneToMany:
+        comments:
+            targetEntity: Comment
+            mappedBy: gag  
+        votes:
+            targetEntity: Vote
+            mappedBy: gag
+
     lifecycleCallbacks: {  }
