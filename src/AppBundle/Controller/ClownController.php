@@ -83,7 +83,7 @@ class ClownController extends Controller
             return $this->redirectToRoute('gagDetail', ['id' => $gag->getId()]);
         }
        //array containing number of upvotes and number of downvotes
-       $votes= $this->calculateVotesForGag($gag);
+       $votes= $gag->getNumberOfVotes();
 
         return $this->render(
             'gag/detailGag.html.twig',
@@ -136,30 +136,9 @@ class ClownController extends Controller
             $gag->addVote($vote);
             $em->persist($gag);
             $em->flush();
-            $votes= $gag->getVotes();
         }
 
        return $this->redirectToRoute('gagDetail', ['id' => $gag->getId()]);
     }
 
-    /**
-    *
-    * Calculate the number of upvotes and downvotes and return an array with those values
-    *
-    */
-    private function calculateVotesForGag(Gag $gag){
-        $votes=$gag->getVotes();
-        $upvotes=0;
-        $downvotes=0;
-        foreach($votes as $vote){
-            if($vote->getVote() == "downvote"){
-                $downvotes++;
-            }
-            else if ($vote->getVote() == "upvote"){
-                $upvotes++;
-            }
-            //else the vote is null, don't count it
-        }
-        return array("upvotes" => $upvotes, "downvotes" => $downvotes);
-    }
 }

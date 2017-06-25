@@ -15,6 +15,6 @@ class VoteRepository extends \Doctrine\ORM\EntityRepository
                     ->createQuery('SELECT vote FROM AppBundle:Vote vote WHERE vote.user=:user AND vote.gag=:gag')
                     ->setParameter('user',$user)
                     ->setParameter('gag',$gag)
-                    ->getOneOrNullResult();
+                    ->getSingleResult();
 	}
 }

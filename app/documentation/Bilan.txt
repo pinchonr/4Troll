@@ -1,0 +1,31 @@
+Bonjour, 
+
+Voici un petit bilan de ce qui marche (avec sqlite)
+-Inscription au site
+-Login
+-Modification du profil utilisateur
+-Post d’un Gag
+-Commentaire du gag
+-Vote du gag
+-api (méthodes GET)
+- authentification httpBasic a l’api
+
+-Docker (marche à l’IUT mais pas sur ma machine). 
+-Sqlite3
+
+
+Et le bilan de ce que nous n’avons pas réussi à faire (ou pas eu le temps de finir):
+
+-Comprendre pourquoi « php bin/console doctrine:schema:validate » fail
+
+- Créer une BDD pour les tests (sachant que l’on utilise déjà sqlite et que beaucoup de propositions s’appuient sur le fait de l’utiliser pour les tests).
+
+- Faire toutes les méthodes CRUD de l’api rest (manque de temps)
+
+- Finir tous les tests (manque de temps)
+
+Bonne correction! 
+
+Vial Joris
+Pinchon Robin
+

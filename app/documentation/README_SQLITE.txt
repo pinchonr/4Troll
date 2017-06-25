@@ -47,3 +47,13 @@ You can access the database by running the following command at the root of the 
 sqlite3 ./var/symfony.db
 
 Please run the given SQL file (default.sql) in order to be able to run tests.
+
+If it doesn't work please register a new user: 
+
+Surname: testeur
+Name: testeur
+Username: testeur
+password: testeur
+email: testeur@test.fr
+
+and make him add a content.

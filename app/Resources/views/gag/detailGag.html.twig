@@ -12,20 +12,20 @@
 
                     <header class="col-md-12 text-center" style="margin:0px;padding:0px;">
 
-                        <h2>{{gag.title}}</h2>
+                        <h2>{{gag.title|upper}}</h2>
                     </header>
                         <img src="{{ asset('uploads/gags/' ~ gag.filename) }}" alt="Gag" class="bg-white" style="max-width:750px;"/>
                     <br/>
                 <!-- Gag informations display-->
                     <footer class="col-md-12 text-left" style="margin:0px; padding:0px;"  >
 
-                            <span class="col-md-4 text-center" style="height:44px;line-height:44px" >Posté le {{gag.lastModified|date('d/m/y')}} par {{gag.author.username}}
+                            <span class="col-md-4 text-center" style="height:44px;line-height:44px" >Posted on {{gag.lastModified|date('m/d/y')}} by {{gag.author.username}}
                             </span>
                             <span class="col-md-4 col-md-offset-4 text-right">
                                 {{downvotes}}
-                                <a href="{{path("gagVote",{ 'id': gag.id , 'voteType':'downvote'})}}"class="btn btn-danger glyphicon glyphicon-minus" style="margin:5px;"></a>                     
+                                <a href="{{path("gagVote",{ 'id': gag.id , 'voteType':'downvote', 'callingRoute':'gagDetail'})}}"class="btn btn-danger glyphicon glyphicon-minus" style="margin:5px;"></a>                     
                                 {{upvotes}}
-                                <a href="{{path("gagVote",{ 'id': gag.id , 'voteType':'upvote'})}}" class="btn btn-success glyphicon glyphicon-plus" style="margin:5px;"></a>
+                                <a href="{{path("gagVote",{ 'id': gag.id , 'voteType':'upvote', 'callingRoute':'gagDetail'})}}" class="btn btn-success glyphicon glyphicon-plus" style="margin:5px;"></a>
                             </span>
                     </footer>
                 </div>
@@ -33,6 +33,7 @@
 
             <div class="col-md-8 col-md-offset-2">
                 <!-- Comment form display -->
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <div class="col-md-12 hardGrey text-left" style="margin-top:10px;padding:0px;">
                     {{ form_start(form) }}
                     {{ form_row(form.message) }}
@@ -40,13 +41,17 @@
                     {{ form_end(form) }}
 
                 </div >
+                {% else %}
+                    <p class="text-center margin-10">You must <a href= {{path('login')}} class="secondaryColor">login</a> if you want to post a comment</p>
+                {% endif %}
                 <!-- Comments display -->
+                
                 <div class="col-md-12 hardGrey text-left" style="margin-top:20px;padding:0px;">
-                    {% for comment in gag.comments %}
+                    {% for comment in gag.comments%}
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Posté le {{comment.publishedAt|date('d/m/y')}} par {{comment.author.username}}
+                            Posted on {{comment.publishedAt|date('m/d/y')}} by {{comment.author.username}}
                         </div>
                         <div class="panel-body">
                             {{comment.message}}

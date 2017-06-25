@@ -172,7 +172,7 @@ class ApiController extends Controller
             return new JsonResponse(['message' => 'No comment found for the given id : '.$request->get('id_comment').' for the Gag with id : '.$request->get('id_gag')], Response::HTTP_NOT_FOUND);
         }
 
-        $json[] = [
+        $json = [
             'id' => $comment->getId(),
             'message' => $comment->getMessage(),
             'published_at' => $comment->getPublishedAt(),

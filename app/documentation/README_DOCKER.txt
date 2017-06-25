@@ -61,5 +61,15 @@ You can access the databases directly with the IP address found above by running
 mysql -u root -proot -h #IP_ADDRESS# -P 3306
 
 
-Please run the given SQL file (default.sql) in order to be able to run tests.
+Please run the given SQL file (default.sql) in order to be able to run tests. 
+
+If it doesn't work please register a new user: 
+
+Surname: testeur
+Name: testeur
+Username: testeur
+password: testeur
+email: testeur@test.fr
+
+and make him add a content.
 

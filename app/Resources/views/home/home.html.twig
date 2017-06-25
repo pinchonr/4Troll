@@ -31,26 +31,17 @@
                 <!-- Gag informations display-->
                     <footer class="col-md-12 text-left" style="margin:0px; padding:0px; background-color:white; color:#404347;"  >
 
-                            <span class="col-md-4 text-center" style="height:44px;line-height:44px" >Posté le {{gag.lastModified|date('d/m/y')}} par {{gag.author.username}}
+                            <span class="col-md-4 text-center" style="height:44px;line-height:44px" >Posted on {{gag.lastModified|date('m/d/y')}} by {{gag.author.username}}
                             </span>
                             <span class="col-md-4 text-center" style="height:44px;line-height:44px">
-                                <a href="{{path("gagDetail",{ 'id': gag.id })}}">Voir les commentaires</a>
+                                <a href="{{path("gagDetail",{ 'id': gag.id })}}">See comments</a>
                             </span>
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <span class="col-md-4 text-right">
-                                0
-                                <a>
-                                    
-                                    <span class="btn btn-danger glyphicon glyphicon-minus" style="margin:5px;"></span>
-                                </a>
-                                
-
-                                10
-                                <a >
-                                    <span class="btn btn-success glyphicon glyphicon-plus" style="margin:5px;"></span>
-                                    
-                                </a>
-                                
+                                {{gag.numberOfVotes['downvotes']}}
+                                <a href="{{path("gagVote",{ 'id': gag.id , 'voteType':'downvote'})}}"class="btn btn-danger glyphicon glyphicon-minus" style="margin:5px;"></a>                     
+                                {{gag.numberOfVotes['upvotes']}}
+                                <a href="{{path("gagVote",{ 'id': gag.id , 'voteType':'upvote'})}}" class="btn btn-success glyphicon glyphicon-plus" style="margin:5px;"></a>
                             </span>
                             {% endif %}
 
