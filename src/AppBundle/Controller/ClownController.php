@@ -8,9 +8,15 @@ use AppBundle\Form\GagType;
 use AppBundle\Form\CommentType;
 use AppBundle\Entity\Gag;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\Vote;
 
 class ClownController extends Controller
 {
+    /**
+    *
+    * Get the home page and render all gags
+    *
+    */
     public function indexAction(Request $request)
     {
         $em= $this->getDoctrine()->getManager();
@@ -21,6 +27,11 @@ class ClownController extends Controller
         ]);
     }
 
+    /**
+    *
+    * Create a new gag 
+    *
+    */
     public function newGagAction(Request $request)
     {
         $em= $this->getDoctrine()->getManager();
@@ -31,7 +42,7 @@ class ClownController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $gag->setAuthor($this->getUser());
-            //we get the file (field is not explicit but only the FileName will be stored in DB)
+            //we get the file (form field is not so explicit but only the FileName will be stored in DB)
             $file=$gag->getFileName();
             //creating unique file name
             $filename=md5(uniqid()).'.'.$file->guessExtension();
@@ -51,6 +62,11 @@ class ClownController extends Controller
         );
     }
 
+    /**
+    *
+    * Get the gag, a form to add comments and action links to vote 
+    *
+    */
     public function gagDetailAction(Request $request, Gag $gag)
     {
         $em= $this->getDoctrine()->getManager();
@@ -66,24 +82,84 @@ class ClownController extends Controller
 
             return $this->redirectToRoute('gagDetail', ['id' => $gag->getId()]);
         }
+       //array containing number of upvotes and number of downvotes
+       $votes= $this->calculateVotesForGag($gag);
 
         return $this->render(
             'gag/detailGag.html.twig',
             array("form" => $form->createView(),
-                  "gag" => $gag
+                  "gag" => $gag,
+                  "upvotes"=> $votes['upvotes'],
+                  "downvotes" => $votes['downvotes']
             )
         );
     }
 
-    public function addUpVoteForGag(Gag $gag)
+    /**
+    *
+    * Set the vote for user. If user select twice the same button, vote is cancelled.
+    *
+    */
+    public function gagVoteAction(Gag $gag, string $voteType)
     {
-        $em= $this->getDoctrine()->getManager();
-        $vote= new Vote();
-        $vote->setUpVote(true);
-        $vote->setUser($this->getUser());
-        $vote->setGag($gag);
-        $gag->addVote($vote);
+        //verifying if user is connected and redirect him to login page if not
+        if(!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')){
+            return $this->redirectToRoute('login');
+        }
 
-        return $this->redirectToRoute('gagDetail', ['id' => $gag->getId()]);
+        $em= $this->getDoctrine()->getManager();
+        //if user has already voted
+        try{
+            
+            $oldVote=$em->getRepository('AppBundle:Vote')->getVoteForUserAndGag($this->getUser(),$gag);
+            //change the value of the vote if different
+            if($oldVote->getVote() != $voteType){
+                $oldVote->setVote($voteType);
+                $em->merge($oldVote);
+                $em->flush();
+            }
+            //or remove the vote (double vote -> vote cancelled)
+            else{
+                $oldVote->setVote(null);
+                $em->merge($oldVote);
+                $em->flush();
+            }
+
+        }
+        //if user has never voted
+        catch(\Doctrine\ORM\NoResultException $e){
+            $vote= new Vote();
+            $vote->setVote($voteType);
+            $vote->setUser($this->getUser());
+            $vote->setGag($gag);
+            $em->persist($vote);
+            $gag->addVote($vote);
+            $em->persist($gag);
+            $em->flush();
+            $votes= $gag->getVotes();
+        }
+
+       return $this->redirectToRoute('gagDetail', ['id' => $gag->getId()]);
+    }
+
+    /**
+    *
+    * Calculate the number of upvotes and downvotes and return an array with those values
+    *
+    */
+    private function calculateVotesForGag(Gag $gag){
+        $votes=$gag->getVotes();
+        $upvotes=0;
+        $downvotes=0;
+        foreach($votes as $vote){
+            if($vote->getVote() == "downvote"){
+                $downvotes++;
+            }
+            else if ($vote->getVote() == "upvote"){
+                $upvotes++;
+            }
+            //else the vote is null, don't count it
+        }
+        return array("upvotes" => $upvotes, "downvotes" => $downvotes);
     }
 }

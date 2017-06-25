@@ -17,12 +17,14 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
+        api:
+            pattern: ^/api
+            security: true
+            http_basic: ~
         main:
             # activate different ways to authenticate
             anonymous: ~
             # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
 
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
             form_login:
@@ -34,4 +36,5 @@ security:
                 target: /
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/api, roles: ROLE_USER }
 

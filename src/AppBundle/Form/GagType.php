@@ -17,7 +17,7 @@ class GagType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', TextType::class)
-                ->add('fileName', FileType::class, array('label' => 'Upload a new file (jpg,ico,png,pdf)'));
+                ->add('fileName', FileType::class, array('label' => 'Upload a new Image'));
     }
     
     /**

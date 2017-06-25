@@ -1,5 +1,53 @@
 AppBundle\Entity\Gag:
     properties:
         fileName:
+            - Image:
+                minWidth: 100
+                minHeight: 100
+                detectCorrupted: true
             - NotBlank: ~
-        
+AppBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: username
+            message: "A user with this username already exists."
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email
+            message: "A user already have this email adress. Haven't you already registered ?"
+    properties:
+        email:
+            - Email: ~
+        username:
+            - Length:
+                min: 2
+                max: 50
+                minMessage: 'Your username must be at least 2 characters long.'
+                maxMessage: 'Your username cannot be longer than 50 characters.'
+            - NotBlank: ~
+            - NotNull: ~
+        name:
+            - Length:
+                max: 50
+                maxMessage: 'Your name cannot be longer than 100 characters.'
+            - NotBlank: ~
+            - NotNull: ~
+        surname:
+            - Length:
+                max: 50
+                maxMessage: 'Your surname cannot be longer than 50 characters.'
+            - NotBlank: ~
+            - NotNull: ~
+        password:
+            - Length:
+                min: 6
+                max: 50
+                minMessage: 'Your password must be at least 6 characters long.'
+                maxMessage: 'Your surname cannot be longer than 50 characters.'
+            - NotBlank: ~
+            - NotNull: ~
+AppBundle\Entity\Vote:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: author
+            message: "You have already voted for this gag."
+

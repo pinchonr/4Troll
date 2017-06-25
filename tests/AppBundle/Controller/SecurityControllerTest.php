@@ -19,6 +19,28 @@ class SecurityControllerTest extends WebTestCase
     }
 
     /**
+    * Testing you hit the register page when the route is /register
+    */
+    public function testPOSTRegisterSuccess()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/register');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('Register', $crawler->filter('h1')->text());
+    }
+
+    /**
+    * Testing you hit the register page when the route is /register
+    */
+    public function testPOSTRegisterFail()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/register');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('Register', $crawler->filter('h1')->text());
+    }
+
+    /**
     * Testing you hit the login page when the route is /login
     */
     public function testGETLogin()
@@ -65,6 +87,8 @@ class SecurityControllerTest extends WebTestCase
         );
         $this->assertFalse($client->getResponse()->isRedirect('http://localhost/'));
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost/login'));
+        $crawler = $client->followRedirect();
+        $this->assertContains('Invalid credentials.',$crawler->filter('form #error')->text());
     }
 
     

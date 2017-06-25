@@ -24,13 +24,14 @@ AppBundle\Entity\Gag:
                 name: user_id
                 referencedColumnName: id
                 nullable: false
-                onDelete: CASCADE
     oneToMany:
         comments:
             targetEntity: Comment
-            mappedBy: gag  
+            mappedBy: gag
+            onDelete: CASCADE
         votes:
             targetEntity: Vote
             mappedBy: gag
+            onDelete: CASCADE
 
     lifecycleCallbacks: {  }

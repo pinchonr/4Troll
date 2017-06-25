@@ -13,17 +13,17 @@ AppBundle\Entity\User:
             type: simple_array
         surname:
             type: string
-            length: 255
+            length: 50
         name:
             type: string
-            length: 255
+            length: 50
         username:
             type: string
-            length: 255
+            length: 50
             unique: true
         password:
             type: string
-            length: 255
+            length: 50
         email:
             type: string
             length: 255

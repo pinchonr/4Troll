@@ -180,7 +180,7 @@ class Gag
     }
 
     /**
-    * Add a new Comment
+    * Add a new vote
     */
     public function addVote(Vote $vote)
     {
@@ -191,7 +191,7 @@ class Gag
     }
 
     /**
-    * Remove a comment
+    * Remove a vote
     */
     public function removeVote(Vote $vote)
     {

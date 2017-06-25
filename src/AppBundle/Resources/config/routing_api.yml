@@ -1,0 +1,31 @@
+gag_single:
+    path: /gags/{id}
+    defaults: { _controller: AppBundle:Api:getGag}
+    methods: [ GET ]
+    requirements:
+        id: \d+
+
+gags_list:
+    path: /gags
+    defaults: { _controller: AppBundle:Api:getGags}
+    methods: [ GET ]
+
+gag_add:
+    path: /gag/new
+    defaults: { _controller: AppBundle:Api:newGag}
+    methods: [ POST ]
+
+comment_single:
+    path: /gags/{id_gag}/comments/{id_comment}
+    defaults: { _controller: AppBundle:Api:getComment}
+    methods: [ GET ]
+    requirements:
+        id_gag: \d+
+        id_comment: \d+
+
+comments_list:
+    path: /gags/{id}/comments
+    defaults: { _controller: AppBundle:Api:getComments}
+    methods: [ GET ]
+    requirements:
+        id: \d+

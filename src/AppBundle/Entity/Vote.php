@@ -23,15 +23,14 @@ class Vote
     private $user;
 
     /**
-     * @var bool
+     * @var string
      */
-    private $upVote= false;
+    private $vote;
 
-    /**
-     * @var bool
-     */
-    private $downVote= false;
-
+    public function __construct()
+    {
+        $this->vote = null;
+    }
 
     /**
      * Get id
@@ -88,46 +87,25 @@ class Vote
     }
 
     /**
-     * Get updown
+     * Get isUpVote
      *
-     * @return bool
+     * @return string
      */
-    public function getUpVote()
+    public function getVote()
     {
-        return $this->upVote;
+        return $this->vote;
     }
 
     /**
-     * Set upVotes
+     * Set isUpVote
      *
-     * @param boolean $updown
+     * @param string $vote
      *
      * @return Vote
      */
-    public function setUpVote()
+    public function setVote($vote)
     {
-        $this->upVote = true;
+        $this->vote = $vote;
     }
 
-    /**
-     * Get updown
-     *
-     * @return bool
-     */
-    public function getDownVote()
-    {
-        return $this->downVote;
-    }
-
-    /**
-     * Set upVotes
-     *
-     * @param boolean $updown
-     *
-     * @return Vote
-     */
-    public function setDownVote()
-    {
-        $this->downVote = true;
-    }
 }

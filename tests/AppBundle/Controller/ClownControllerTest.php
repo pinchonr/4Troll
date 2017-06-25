@@ -6,21 +6,24 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ClownControllerTest extends WebTestCase
 {
-    public function testIndex()
+    /**
+    *
+    * Test getting home page
+    *
+    */
+    public function testGetIndex()
     {
         $client = static::createClient();
-
         $crawler = $client->request('GET', '/');
-
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('Welcome on the 4Troll website!', $crawler->filter('h1')->text());
     }
 
-    public function testNewGag()
-    {
-    }
-
-
+    /**
+    *
+    * Test clicking on the "Voir les commentaires" link send to the Detail of the gag.
+    *
+    */
     public function testGagDetailLink()
     {
         $client = static::createClient();

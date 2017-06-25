@@ -13,8 +13,8 @@
     <form action="{{ path('login') }}" method="post" class="hardGrey">
 
     {% if error %}
-        <div class="text-center text-danger bg-danger">
-            <span class="glyphicon glyphicon-remove"> </span>{{ error.messageKey|trans(error.messageData, 'security') }}
+        <div class="text-center text-danger bg-danger" id="error">
+            <span class="glyphicon glyphicon-remove"></span>{{ error.messageKey|trans(error.messageData, 'security') }}
         </div>
     {% endif %}
 

@@ -23,4 +23,15 @@ newGag:
 
 gagDetail:
     path: /Gag/{id}
-    defaults: { _controller: AppBundle:Clown:gagDetail}
+    defaults: { _controller: AppBundle:Clown:gagDetail }
+    requirements:
+        id: \d+
+gagVote:
+    path: /Gag/{id}/{voteType}
+    defaults: { _controller: AppBundle:Clown:gagVote }
+    requirements:
+        id: \d+
+        voteType: upvote|downvote
+api:
+    resource: '@AppBundle/Resources/config/routing_api.yml'
+    prefix: /api

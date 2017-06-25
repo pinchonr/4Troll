@@ -1,17 +1,17 @@
 AppBundle\Entity\Vote:
     type: entity
-    table: VoteGag
-    repositoryClass: AppBundle\Repository\VoteGagRepository
+    table: Vote
+    repositoryClass: AppBundle\Repository\VoteRepository
     id:
-        gag:
-            associationKey: true
-        user:
-            associationKey: true
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
     fields:
-        upVote:
-            type: boolean
-        downVote:
-            type: boolean
+        vote:
+            type: string
+            nullable: true
     manyToOne: 
         gag:
             targetEntity: Gag

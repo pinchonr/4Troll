@@ -17,12 +17,12 @@ AppBundle\Entity\Comment:
         gag:
             targetEntity: Gag
             inversedBy: comments
+
         author:
             targetEntity: User
             joinColumn:
                 name: user_id
                 referencedColumnName: id
                 nullable: false
-                onDelete: CASCADE
 
     lifecycleCallbacks: {  }

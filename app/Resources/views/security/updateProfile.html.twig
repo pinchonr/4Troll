@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}4Troll - User Profile{% endblock %}
+
+{% block body %}
+    <h1 class="text-center hardGrey">User Profile:</h1>
+
+    <div class="col-md-8 col-md-offset-2">
+
+    {{ form_start(form) }}
+    {{ form_row(form.surname) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.password)}}
+    {{ form_row(form.email) }}
+    <button  class="btn btn-success col-md-12" type="submit">Update my profile</button>
+	{{ form_end(form) }}
+
+    </div>
+
+	
+
+{% endblock %}
