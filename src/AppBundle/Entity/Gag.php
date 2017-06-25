@@ -248,20 +248,19 @@ class Gag
     *
     *
     */
-    public function getNumberOfVotes(){
+    public function getNumberOfVotes()
+    {
         $votes=$this->votes;
         $upvotes=0;
         $downvotes=0;
-        foreach($votes as $vote){
-            if($vote->getVote() == "downvote"){
+        foreach ($votes as $vote) {
+            if ($vote->getVote() == "downvote") {
                 $downvotes++;
-            }
-            else if ($vote->getVote() == "upvote"){
+            } elseif ($vote->getVote() == "upvote") {
                 $upvotes++;
             }
             //else the vote is null, don't count it
         }
         return array("upvotes" => $upvotes, "downvotes" => $downvotes);
-
     }
 }

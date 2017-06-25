@@ -20,7 +20,7 @@ class ApiControllerTest extends WebTestCase
         $client->request('GET', '/api/gags');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('"id":1',$client->getResponse()->getContent());
+        $this->assertContains('"id":1', $client->getResponse()->getContent());
     }
 
     /**
@@ -37,7 +37,7 @@ class ApiControllerTest extends WebTestCase
         $client->request('GET', '/api/gags');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('"id":1',$client->getResponse()->getContent());
+        $this->assertContains('"id":1', $client->getResponse()->getContent());
     }
 
     /**
@@ -54,7 +54,7 @@ class ApiControllerTest extends WebTestCase
         $client->request('GET', '/api/gags/1/comments');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('[{',$client->getResponse()->getContent());
+        $this->assertContains('[{', $client->getResponse()->getContent());
     }
 
     /**
@@ -71,7 +71,6 @@ class ApiControllerTest extends WebTestCase
         $client->request('GET', '/api/gags/1/comments/1');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('{"id":1',$client->getResponse()->getContent());
+        $this->assertContains('{"id":1', $client->getResponse()->getContent());
     }
-
 }

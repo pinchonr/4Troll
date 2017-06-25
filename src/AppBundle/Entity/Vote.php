@@ -107,5 +107,4 @@ class Vote
     {
         $this->vote = $vote;
     }
-
 }

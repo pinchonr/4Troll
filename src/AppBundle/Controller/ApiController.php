@@ -15,7 +15,7 @@ use AppBundle\Entity\Comment;
 
 /**
 *
-* Class managin all request under the /api route. You must authenticate via http basic in order to be able to 
+* Class managin all request under the /api route. You must authenticate via http basic in order to be able to
 * use the service
 */
 class ApiController extends Controller
@@ -100,13 +100,13 @@ class ApiController extends Controller
 
     /**
     *
-    * Post a new gag 
+    * Post a new gag
     *
     */
     public function newGagAction(Request $request)
     {
         $data = $request->getContent();
-        $arrayData= json_decode($data,true);
+        $arrayData= json_decode($data, true);
         $gag= new Gag();
         $gag->setAuthor($this->getUser());
         $gag->setTitle($arrayData['title']);
@@ -181,8 +181,4 @@ class ApiController extends Controller
 
         return new JsonResponse($json);
     }
-
-    
 }
-
-?>

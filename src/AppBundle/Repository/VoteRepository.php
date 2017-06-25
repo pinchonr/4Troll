@@ -10,11 +10,12 @@ namespace AppBundle\Repository;
  */
 class VoteRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function getVoteForUserAndGag($user,$gag){
-		return $this->getEntityManager()
+    public function getVoteForUserAndGag($user, $gag)
+    {
+        return $this->getEntityManager()
                     ->createQuery('SELECT vote FROM AppBundle:Vote vote WHERE vote.user=:user AND vote.gag=:gag')
-                    ->setParameter('user',$user)
-                    ->setParameter('gag',$gag)
+                    ->setParameter('user', $user)
+                    ->setParameter('gag', $gag)
                     ->getSingleResult();
-	}
+    }
 }

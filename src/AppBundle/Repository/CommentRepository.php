@@ -21,7 +21,8 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
                     ->getResult();
     }
 
-    public function fingCommentByIdAndGagId($id_gag, $id_comment) {
+    public function fingCommentByIdAndGagId($id_gag, $id_comment)
+    {
         return $this->getEntityManager()
                     ->createQuery('SELECT comment 
                     			   FROM AppBundle:Comment comment 

@@ -86,7 +86,7 @@ class SecurityController extends Controller
             return $this->redirectToRoute('app');
         }
 
-         return $this->render(
+        return $this->render(
             'security/updateProfile.html.twig',
             array('form' => $form->createView())
         );

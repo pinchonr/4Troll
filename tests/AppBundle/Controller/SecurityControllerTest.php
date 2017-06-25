@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
 {
-
     private $BASE_URL='http://localhost';
     /**
     * Testing you hit the register page when the route is /register
@@ -61,7 +60,6 @@ class SecurityControllerTest extends WebTestCase
         );
         $this->assertContains('Register', $crawler->filter('h1')->text());
         $this->assertContains('Your password must be at least 6 characters long.', $crawler->filter('form')->text());
-
     }
 
     /**
@@ -112,7 +110,7 @@ class SecurityControllerTest extends WebTestCase
         $this->assertFalse($client->getResponse()->isRedirect($this->BASE_URL.'/'));
         $this->assertTrue($client->getResponse()->isRedirect($this->BASE_URL.'/login'));
         $crawler = $client->followRedirect();
-        $this->assertContains('Invalid credentials.',$crawler->filter('form #error')->text());
+        $this->assertContains('Invalid credentials.', $crawler->filter('form #error')->text());
     }
 
     /**
@@ -125,7 +123,4 @@ class SecurityControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertContains('User Profile', $crawler->filter('h1')->text());
     }
-
-
-    
 }

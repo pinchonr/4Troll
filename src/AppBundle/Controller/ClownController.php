@@ -29,7 +29,7 @@ class ClownController extends Controller
 
     /**
     *
-    * Create a new gag 
+    * Create a new gag
     *
     */
     public function newGagAction(Request $request)
@@ -64,7 +64,7 @@ class ClownController extends Controller
 
     /**
     *
-    * Get the gag, a form to add comments and action links to vote 
+    * Get the gag, a form to add comments and action links to vote
     *
     */
     public function gagDetailAction(Request $request, Gag $gag)
@@ -103,31 +103,29 @@ class ClownController extends Controller
     public function gagVoteAction(Gag $gag, string $voteType)
     {
         //verifying if user is connected and redirect him to login page if not
-        if(!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')){
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('login');
         }
 
         $em= $this->getDoctrine()->getManager();
         //if user has already voted
-        try{
-            
-            $oldVote=$em->getRepository('AppBundle:Vote')->getVoteForUserAndGag($this->getUser(),$gag);
+        try {
+            $oldVote=$em->getRepository('AppBundle:Vote')->getVoteForUserAndGag($this->getUser(), $gag);
             //change the value of the vote if different
-            if($oldVote->getVote() != $voteType){
+            if ($oldVote->getVote() != $voteType) {
                 $oldVote->setVote($voteType);
                 $em->merge($oldVote);
                 $em->flush();
             }
             //or remove the vote (double vote -> vote cancelled)
-            else{
+            else {
                 $oldVote->setVote(null);
                 $em->merge($oldVote);
                 $em->flush();
             }
-
         }
         //if user has never voted
-        catch(\Doctrine\ORM\NoResultException $e){
+        catch (\Doctrine\ORM\NoResultException $e) {
             $vote= new Vote();
             $vote->setVote($voteType);
             $vote->setUser($this->getUser());
@@ -138,7 +136,6 @@ class ClownController extends Controller
             $em->flush();
         }
 
-       return $this->redirectToRoute('gagDetail', ['id' => $gag->getId()]);
+        return $this->redirectToRoute('gagDetail', ['id' => $gag->getId()]);
     }
-
 }
